@@ -1,7 +1,14 @@
-import React from "react";
+import IMAGE from "../assets/photoRegistr.jpg";
+import AuthLayout from "../components/AuthLayout";
+import AuthForm from "../components/AuthForm";
 
 const SignUp = () => {
-  return <div>SignUp</div>;
+  return (
+    <AuthLayout image={IMAGE}>
+      <h3 className="mb-10">Sign Up</h3>
+      <AuthForm BtnText="Зарегистрироваться" />
+    </AuthLayout>
+  );
 };
 
 export default SignUp;
