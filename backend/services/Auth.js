@@ -6,17 +6,17 @@ import { Conflict } from "../utils/Errors.js";
 import { ACCESS_TOKEN_MAXAGE } from "../constants.js";
 
 class AuthService {
-  static async signIn({ login, password, fingerprint }) {}
+  static async signIn({ email, password, fingerprint }) {}
 
-  static async signUp({ login, password, fingerprint }) {
+  static async signUp({ email, password, fingerprint }) {
     // check if there such user in db, if yes, throw an error
-    const userData = await UserRepository.getUserData(login);
+    const userData = await UserRepository.getUserData(email);
     if (userData) throw new Conflict("Такой пользователь уже существует");
     // if not, hash password, bcrypt.hashSync(password, 8)
     const hashedPassword = bcrypt.hashSync(password, 8);
     // add new user to db, get id back
-    const { id } = await UserRepository.createUser({ login, hashedPassword });
-    const payload = { id, login };
+    const { id } = await UserRepository.createUser({ email, hashedPassword });
+    const payload = { id, email };
     // generate access and refresh tokens with TokenService
     const accessToken = await TokenService.generateAccessToken(payload);
     const refreshToken = await TokenService.generateRefreshToken(payload);
