@@ -1,4 +1,7 @@
 import jwt from "jsonwebtoken";
+import dotenv from "dotenv";
+
+dotenv.config();
 
 class TokenService {
   static async generateAccessToken(payload) {
@@ -6,7 +9,7 @@ class TokenService {
       expiresIn: "30m",
     });
   }
-  static async generateRefreshToken() {
+  static async generateRefreshToken(payload) {
     return await jwt.sign(payload, process.env.REFRESH_TOKEN_SECRET, {
       expiresIn: "15d",
     });
