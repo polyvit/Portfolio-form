@@ -1,13 +1,14 @@
-const Input = ({
-  label,
-  type,
-  ...props
-}: {
+import { DetailedHTMLProps, InputHTMLAttributes } from "react";
+
+interface InputProps
+  extends DetailedHTMLProps<
+    InputHTMLAttributes<HTMLInputElement>,
+    HTMLInputElement
+  > {
   label: string;
-  type: string;
-  required: boolean;
-  placeholder: string;
-}) => {
+}
+
+const Input: React.FC<InputProps> = ({ label, type, ...props }) => {
   return (
     <div className="mb-5">
       <label
