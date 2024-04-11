@@ -6,7 +6,7 @@ const SignUp = () => {
   return (
     <AuthLayout image={IMAGE}>
       <h3 className="mb-10">Sign Up</h3>
-      <AuthForm BtnText="Зарегистрироваться" />
+      <AuthForm BtnText="Зарегистрироваться" isLogin={false} />
     </AuthLayout>
   );
 };

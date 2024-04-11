@@ -6,7 +6,7 @@ const SignIn = () => {
   return (
     <AuthLayout image={IMAGE}>
       <h3 className="mb-10">Sign In</h3>
-      <AuthForm BtnText="Войти"/>
+      <AuthForm BtnText="Войти" isLogin />
     </AuthLayout>
   );
 };
