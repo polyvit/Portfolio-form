@@ -14,6 +14,11 @@ class AuthService {
     if (response.data.accessToken) AuthHelper.saveAccessToken(response.data.accessToken)
     return response
   }
+  static async logOut() {
+    const response = await axiosInstance.post(endpoints.AUTH.logout);
+    if (response.data) AuthHelper.deleteAccessToken();
+    return response
+  }
 }
 
 export default AuthService

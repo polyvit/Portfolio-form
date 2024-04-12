@@ -27,6 +27,16 @@ class AuthController {
       return ErrorUtils.catchError(res, err);
     }
   }
+  static async logOut(req, res) {
+    const refreshToken = req.cookies.refreshToken;
+    try {
+      await AuthService.logOut(refreshToken);
+      res.clearCookie("refreshToken");
+      return res.sendStatus(200);
+    } catch (err) {
+      return ErrorUtils.catchError(res, err);
+    }
+  }
 }
 
 export default AuthController;

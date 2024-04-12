@@ -25,8 +25,7 @@ class AuthHelper {
     }
     static saveAccessToken(accessToken: string) {
         Cookies.set(TokensEnum.ACCESS_TOKEN, accessToken, {
-            sameSite: 'strict',
-            domain: 'localhost',
+            sameSite: "none",
             expires: 7
         })
     }

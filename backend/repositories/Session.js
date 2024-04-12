@@ -11,13 +11,13 @@ class SessionRepository {
       data: session,
     });
   }
-  // static async getUserData(login) {
-  //   return prisma.user.findUnique({
-  //     where: {
-  //       email: login,
-  //     },
-  //   });
-  // }
+  static async deleteRefreshSession(refreshToken) {
+    return prisma.session.delete({
+      where: {
+        refresh_token: refreshToken,
+      },
+    });
+  }
 }
 
 export default SessionRepository;

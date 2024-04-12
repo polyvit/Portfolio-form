@@ -7,10 +7,8 @@ import { ACCESS_TOKEN_MAXAGE } from "../constants.js";
 
 class AuthService {
   static async signIn({ email, password, fingerprint }) {
-    //check if there is such user in db, if not - throw an error
     const userData = await UserRepository.getUserData(email);
     if (!userData) throw new NotFound("Такого пользователя не существует");
-    //check if password is correct, if not - throw an error
     const isPasswordValid = bcrypt.compareSync(password, userData.password);
     if (!isPasswordValid) {
       console.log("signInService", "password not valid");
@@ -51,7 +49,9 @@ class AuthService {
     };
   }
 
-  static async logOut(refreshToken) {}
+  static async logOut(refreshToken) {
+    return await SessionRepository.deleteRefreshSession(refreshToken);
+  }
 
   static async refresh({ fingerprint, currentRefreshToken }) {}
 }
