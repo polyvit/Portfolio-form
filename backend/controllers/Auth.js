@@ -15,6 +15,18 @@ class AuthController {
       return ErrorUtils.catchError(res, err);
     }
   }
+  static async signIn(req, res) {
+    const { email, password } = req.body;
+    const { fingerprint } = req;
+    try {
+      const { accessToken, refreshToken, accessTokenExpiration } =
+        await AuthService.signIn({ email, password, fingerprint });
+      res.cookie("refreshToken", refreshToken, COOKIE_SETTINGS.REFRESH_TOKEN);
+      return res.status(200).json({ accessToken, accessTokenExpiration });
+    } catch (err) {
+      return ErrorUtils.catchError(res, err);
+    }
+  }
 }
 
 export default AuthController;
