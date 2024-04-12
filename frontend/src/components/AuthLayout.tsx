@@ -1,8 +1,11 @@
 import React from "react";
 
-// @ts-ignore
+interface IAuthLayout {
+  image: string;
+  children: React.ReactNode;
+}
 
-const AuthLayout = ({ image, children }) => {
+const AuthLayout: React.FC<IAuthLayout> = ({ image, children }) => {
   return (
     <div className="flex flex-col gap-[50px] lg:flex-row">
       <img
