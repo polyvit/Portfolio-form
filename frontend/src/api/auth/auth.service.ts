@@ -6,6 +6,7 @@ import { axiosInstance } from "./axios";
 interface IAuthResponse {
   accessToken: string;
   accessTokenExpiration: string;
+  email: string;
 }
 
 class AuthService {

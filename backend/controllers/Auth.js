@@ -10,7 +10,9 @@ class AuthController {
       const { accessToken, refreshToken, accessTokenExpiration } =
         await AuthService.signUp({ email, password, fingerprint });
       res.cookie("refreshToken", refreshToken, COOKIE_SETTINGS.REFRESH_TOKEN);
-      return res.status(200).json({ accessToken, accessTokenExpiration });
+      return res
+        .status(200)
+        .json({ accessToken, accessTokenExpiration, email });
     } catch (err) {
       return ErrorUtils.catchError(res, err);
     }
@@ -22,7 +24,9 @@ class AuthController {
       const { accessToken, refreshToken, accessTokenExpiration } =
         await AuthService.signIn({ email, password, fingerprint });
       res.cookie("refreshToken", refreshToken, COOKIE_SETTINGS.REFRESH_TOKEN);
-      return res.status(200).json({ accessToken, accessTokenExpiration });
+      return res
+        .status(200)
+        .json({ accessToken, accessTokenExpiration, email });
     } catch (err) {
       return ErrorUtils.catchError(res, err);
     }

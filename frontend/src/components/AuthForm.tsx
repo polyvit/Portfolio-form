@@ -3,7 +3,7 @@ import { Link, useNavigate } from "react-router-dom";
 import Button from "../elements/Button";
 import Input from "../elements/Input";
 import AuthService from "../api/auth/auth.service";
-import { useMutation } from "@tanstack/react-query";
+import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { IAuthFormData } from "../types";
 
 interface IAuthFormProps {
@@ -14,13 +14,15 @@ interface IAuthFormProps {
 const AuthForm: React.FC<IAuthFormProps> = ({ BtnText, isLogin }) => {
   const [email, setEmail] = useState<string>("");
   const [password, setPassword] = useState<string>("");
+  const queryClient = useQueryClient();
 
   const navigate = useNavigate();
 
   const { mutate: mutateLogin, isPending: isPendingLogin } = useMutation({
     mutationKey: ["login"],
     mutationFn: (data: IAuthFormData) => AuthService.main("login", data),
-    onSuccess: () => {
+    onSuccess: (data) => {
+      queryClient.setQueryData(["userEmail"], data.data.email);
       setEmail("");
       setPassword("");
       navigate("/form");
@@ -30,7 +32,8 @@ const AuthForm: React.FC<IAuthFormProps> = ({ BtnText, isLogin }) => {
   const { mutate: mutateRegister, isPending: isPendingRegister } = useMutation({
     mutationKey: ["register"],
     mutationFn: (data: IAuthFormData) => AuthService.main("register", data),
-    onSuccess: () => {
+    onSuccess: (data) => {
+      queryClient.setQueryData(["userEmail"], data.data.email);
       setEmail("");
       setPassword("");
       navigate("/form");
@@ -41,10 +44,6 @@ const AuthForm: React.FC<IAuthFormProps> = ({ BtnText, isLogin }) => {
     e.preventDefault();
     const data = { email, password };
     isLogin ? mutateLogin(data) : mutateRegister(data);
-    // AuthService.main(isLogin ? "login" : "register", {
-    //   email,
-    //   password,
-    // });
   };
 
   const isPending = isPendingLogin || isPendingRegister;
