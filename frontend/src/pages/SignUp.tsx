@@ -5,7 +5,7 @@ import AuthForm from "../components/AuthForm";
 const SignUp = () => {
   return (
     <AuthLayout image={IMAGE}>
-      <h3 className="mb-10">Sign Up</h3>
+      <h3 className="mb-10 text-3xl font-bold dark:text-white">Регистрация</h3>
       <AuthForm BtnText="Зарегистрироваться" isLogin={false} />
     </AuthLayout>
   );
