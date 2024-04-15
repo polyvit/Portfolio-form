@@ -1,7 +1,6 @@
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import AuthService from "../api/auth/auth.service";
 import { useNavigate } from "react-router-dom";
-import { useEffect } from "react";
 
 const FormPage = () => {
   const navigate = useNavigate();
@@ -16,8 +15,6 @@ const FormPage = () => {
   });
 
   const data = queryClient.getQueryData(["userEmail"]);
-
-  if (!data) navigate("/sign-in");
 
   return (
     <div className="relative w-screen h-screen flex items-center justify-center">

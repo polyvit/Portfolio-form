@@ -5,6 +5,7 @@ import Input from "../elements/Input";
 import AuthService from "../api/auth/auth.service";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { IAuthFormData } from "../types";
+import ApiHelper from "../api/api.helper";
 
 interface IAuthFormProps {
   BtnText: string;
@@ -27,6 +28,9 @@ const AuthForm: React.FC<IAuthFormProps> = ({ BtnText, isLogin }) => {
       setPassword("");
       navigate("/form");
     },
+    onError: (err) => {
+      ApiHelper.showErrorNotification(err);
+    },
   });
 
   const { mutate: mutateRegister, isPending: isPendingRegister } = useMutation({
@@ -37,6 +41,9 @@ const AuthForm: React.FC<IAuthFormProps> = ({ BtnText, isLogin }) => {
       setEmail("");
       setPassword("");
       navigate("/form");
+    },
+    onError: (err) => {
+      ApiHelper.showErrorNotification(err);
     },
   });
 

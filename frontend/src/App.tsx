@@ -1,9 +1,20 @@
-import { Routes, Route, Navigate } from "react-router-dom";
+import { Routes, Route, Navigate, useNavigate } from "react-router-dom";
 import SignIn from "./pages/SignIn";
 import SignUp from "./pages/SignUp";
 import FormPage from "./pages/FormPage";
+import { useEffect } from "react";
+import AuthHelper from "./api/auth/auth.helper";
 
 function App() {
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    const token = AuthHelper.getAccessToken();
+    if (!token) {
+      navigate("/sign-up");
+    }
+  }, []);
+
   return (
     <>
       <Routes>
