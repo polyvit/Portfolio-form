@@ -6,7 +6,7 @@ const useInput = (initialVal: any, validators: Record<string, any>) => {
     const [wasTouched, setWasTouched] = useState<boolean>(false)
     const valid = useValidate(value, validators)
 
-    const onChange = (e: ChangeEvent<HTMLInputElement>) => {
+    const onChange = (e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
         setValue(e.target.value)
     }
  

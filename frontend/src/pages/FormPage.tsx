@@ -18,7 +18,7 @@ const FormPage = () => {
   const data = queryClient.getQueryData(["userEmail"]);
 
   return (
-    <div className="relative w-screen h-screen flex items-center justify-center">
+    <div className="relative w-screen h-screen flex justify-center">
       <button
         onClick={() => mutateLogout()}
         disabled={isPendingLogout}
@@ -26,16 +26,8 @@ const FormPage = () => {
       >
         Logout
       </button>
-      <div className="text-center">
+      <div className="text-center mt-[30px]">
         <ProjectForm />
-        {/* {data === process.env.REACT_APP_OWNER_EMAIL && (
-          <button
-            type="button"
-            className="focus:outline-none text-white bg-purple-700 hover:bg-purple-800 focus:ring-4 focus:ring-purple-300 font-medium rounded-lg text-sm px-5 py-2.5 mb-2 dark:bg-purple-600 dark:hover:bg-purple-700 dark:focus:ring-purple-900"
-          >
-            Добавить
-          </button>
-        )} */}
       </div>
     </div>
   );

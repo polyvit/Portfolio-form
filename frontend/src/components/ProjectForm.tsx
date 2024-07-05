@@ -1,70 +1,80 @@
-import React from "react";
-import Input from "../elements/Input";
+import React, { useState } from "react";
 import Textarea from "../elements/Textarea";
 import Stepper from "./Stepper";
+import GeneralData from "./GeneralData";
+import ImageDropdown from "./ImageDropdown";
+import Stack from "./Stack";
+import useInput from "../hooks/use-input";
 
-// Демо, репозиторий, фотографии, задачи, стек, описание, коротко, название, год
+const steps = ["Основное", "Картинки", "Стек", "Дополнительно"];
+const stack = [
+  "JavaScript",
+  "TypeScript",
+  "React",
+  "Redux",
+  "Vue",
+  "Vuex",
+  "Next",
+  "Jest",
+  "Pinia",
+  "Prisma",
+];
 
 const ProjectForm = () => {
+  const [stepNumber, setStepNumber] = useState(0);
+  const tasks = useInput("", { isEmpty: true });
+
+  const handleMainBtnClick = () => {
+    if (stepNumber === steps.length - 1) {
+      console.log("Отправлено");
+    } else {
+      setStepNumber((stepNumber) => stepNumber + 1);
+    }
+  };
+
   return (
     <div className="flex flex-col items-center gap-4">
-      <Stepper />
-      <form className="w-[500px]">
-        <Input
-          label="Название"
-          error="Поле не должно быть пустым"
-          touched={false}
-          invalid={false}
-          placeholder="Укажите название проекта"
-        />
-        <Input
-          label="Описание"
-          error="Поле не должно быть пустым"
-          touched={false}
-          invalid={false}
-          placeholder="Укажите короткое описание проекта"
-        />
-        <Textarea
-          label="Подробное описание"
-          error="Поле не должно быть пустым"
-          touched={false}
-          invalid={false}
-          placeholder="Укажите подробное описание проекта"
-          rows={5}
-          id="Description"
-        />
-        <Input
-          label="Демоверсия"
-          error="Поле не должно быть пустым"
-          touched={false}
-          invalid={false}
-          placeholder="Прикрепите ссылку на демоверсию проекта"
-        />
-        <Input
-          label="Репозиторий"
-          error="Поле не должно быть пустым"
-          touched={false}
-          invalid={false}
-          placeholder="Прикрепите ссылку на репозиторий проекта"
-        />
-        <Input
-          type="number"
-          label="Дата выполнения"
-          error="Нужно ввести год"
-          touched={false}
-          invalid={false}
-          min="1900"
-          max="2099"
-          step="1"
-          placeholder="2024"
-        />
+      <Stepper
+        steps={steps}
+        stepNumber={stepNumber}
+        setStepNumber={setStepNumber}
+      />
+      <form className="w-[500px] grow">
+        {stepNumber === 0 && <GeneralData />}
+        {stepNumber === 1 && <ImageDropdown />}
+        {stepNumber === 2 && <Stack stack={stack} />}
+        {stepNumber === 3 && (
+          <Textarea
+            label="Задачи на доработку"
+            placeholder="Перечислите через запятую, какие задачи по проекту вы планируете выполнить в дальнейшем"
+            value={tasks.value}
+            onChange={tasks.onChange}
+            onBlur={tasks.onBlur}
+            error={tasks.errorText}
+            touched={tasks.wasTouched}
+            invalid={tasks.inputValid}
+            rows={8}
+          />
+        )}
       </form>
-      <button
-        type="button"
-        className="focus:outline-none text-white bg-purple-700 hover:bg-purple-800 focus:ring-4 focus:ring-purple-300 font-medium rounded-lg text-sm px-5 py-2.5 mb-2 dark:bg-purple-600 dark:hover:bg-purple-700 dark:focus:ring-purple-900"
-      >
-        Добавить
-      </button>
+      <div className="flex gap-4">
+        {stepNumber !== 0 && (
+          <button
+            onClick={() => setStepNumber((stepNumber) => stepNumber - 1)}
+            type="button"
+            className="focus:outline-none text-white bg-purple-700 hover:bg-purple-800 focus:ring-4 focus:ring-purple-300 font-medium rounded-lg text-sm px-5 py-2.5 mb-2 dark:bg-purple-600 dark:hover:bg-purple-700 dark:focus:ring-purple-900"
+          >
+            Вернуться
+          </button>
+        )}
+        <button
+          onClick={handleMainBtnClick}
+          type="button"
+          className="focus:outline-none text-white bg-purple-700 hover:bg-purple-800 focus:ring-4 focus:ring-purple-300 font-medium rounded-lg text-sm px-5 py-2.5 mb-2 dark:bg-purple-600 dark:hover:bg-purple-700 dark:focus:ring-purple-900"
+        >
+          {stepNumber === steps.length - 1 ? "Отправить" : "Далее"}
+        </button>
+      </div>
     </div>
   );
 };
