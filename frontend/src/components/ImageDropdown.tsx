@@ -1,11 +1,7 @@
 import { ChangeEvent, useState, DragEvent } from "react";
 import cn from "classnames";
 import useFormContext from "../hooks/use-form-context";
-
-type selectedImage = {
-  name: string;
-  url: string;
-};
+import { IData, image } from "../types";
 
 const ImageDropdown = () => {
   const [isDragging, setIsDragging] = useState<boolean>(false);
@@ -18,8 +14,8 @@ const ImageDropdown = () => {
   const addImages = (files: FileList) => {
     for (let i = 0; i < files.length; i++) {
       if (files[i].type.split("/")[0] !== "image") continue;
-      if (!data.images.some((img) => img.name === files[i].name)) {
-        setData((prevData) => ({
+      if (!data.images.some((img: image) => img.name === files[i].name)) {
+        setData((prevData: IData) => ({
           ...prevData,
           images: [
             ...data.images,
@@ -30,9 +26,9 @@ const ImageDropdown = () => {
     }
   };
   const deleteImage = (index: number) => {
-    setData((prevData) => ({
+    setData((prevData: IData) => ({
       ...prevData,
-      images: data.images.filter((_, i) => i !== index),
+      images: data.images.filter((_: any, i: number) => i !== index),
     }));
   };
 
@@ -113,7 +109,7 @@ const ImageDropdown = () => {
         </label>
       </div>
       <div className="w-full h-auto flex gap-1 flex-wrap mt-4">
-        {data.images.map((img, i) => (
+        {data.images.map((img: image, i: number) => (
           <div className="w-[75px] h-[75px] mr-[5px] relative" key={img.name}>
             <img
               src={img.url}

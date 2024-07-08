@@ -1,5 +1,14 @@
 import React, { createContext, useState } from "react";
-export const FormContext = createContext({ state: {}, actions: {} });
+import { IData } from "./types";
+export const FormContext = createContext<IFormContext>({
+  state: {},
+  actions: {},
+});
+
+interface IFormContext {
+  state: IData | {};
+  actions: Record<string, React.Dispatch<React.SetStateAction<IData>>> | {};
+}
 
 const FormProvider = ({ children }: { children: React.ReactNode }) => {
   const [data, setData] = useState({

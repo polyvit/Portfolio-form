@@ -3,8 +3,9 @@ import Textarea from "../elements/Textarea";
 import Input from "../elements/Input";
 import useForm from "../hooks/use-form";
 import useFormContext from "../hooks/use-form-context";
+import { IForm } from "../types";
 
-const GeneralData = ({ formData }) => {
+const GeneralData = ({ formData }: { formData: IForm }) => {
   const context = useFormContext();
 
   useEffect(() => {

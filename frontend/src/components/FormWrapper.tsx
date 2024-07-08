@@ -1,17 +1,14 @@
-import React from "react";
 import ProjectForm from "./ProjectForm";
-import useFormContext from "../hooks/use-form-context";
 import useForm from "../hooks/use-form";
 import useInput from "../hooks/use-input";
+import { IForm } from "../types";
 
 const FormWrapper = () => {
-  const context = useFormContext();
-  const formGeneralData = useForm();
+  const formGeneralData: IForm = useForm();
   const tasks = useInput("", { isEmpty: true });
-  console.log("context", context.state.data);
   return (
     <div className="text-center mt-[30px]">
-      <ProjectForm formGeneralData={formGeneralData} tasksToBeDone={tasks} />
+      <ProjectForm formGeneralData={formGeneralData} tasks={tasks} />
     </div>
   );
 };

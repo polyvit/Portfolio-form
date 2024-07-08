@@ -4,6 +4,8 @@ import ImageDropdown from "./ImageDropdown";
 import Stack from "./Stack";
 import Tasks from "./Tasks";
 import useStepper from "../hooks/use-stepper";
+import { IForm, IInput } from "../types";
+import useFormContext from "../hooks/use-form-context";
 
 const steps = ["Основное", "Картинки", "Стек", "Дополнительно"];
 const stack = [
@@ -19,7 +21,13 @@ const stack = [
   "Prisma",
 ];
 
-const ProjectForm = ({ formGeneralData, tasksToBeDone }) => {
+const ProjectForm = ({
+  formGeneralData,
+  tasks,
+}: {
+  formGeneralData: IForm;
+  tasks: IInput;
+}) => {
   const {
     stepIndex,
     step,
@@ -32,12 +40,16 @@ const ProjectForm = ({ formGeneralData, tasksToBeDone }) => {
     <GeneralData formData={formGeneralData} />,
     <ImageDropdown />,
     <Stack stack={stack} />,
-    <Tasks tasks={tasksToBeDone} />,
+    <Tasks tasks={tasks} />,
   ]);
+
+  const {
+    state: { data },
+  } = useFormContext();
 
   const handleMainBtnClick = () => {
     if (isLastStep) {
-      console.log("Отправлено");
+      console.log("data", data);
     } else {
       next();
     }

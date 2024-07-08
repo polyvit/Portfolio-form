@@ -1,4 +1,5 @@
 import useFormContext from "../hooks/use-form-context";
+import { IData } from "../types";
 
 const Stack = ({ stack }: { stack: string[] }) => {
   const {
@@ -6,14 +7,14 @@ const Stack = ({ stack }: { stack: string[] }) => {
     state: { data },
   } = useFormContext();
 
-  const changeHandler = (skill) => {
+  const changeHandler = (skill: string) => {
     if (data.stack.includes(skill)) {
-      setData((prev) => ({
+      setData((prev: IData) => ({
         ...prev,
         stack: prev.stack.filter((s) => s !== skill),
       }));
     } else {
-      setData((prev) => ({
+      setData((prev: IData) => ({
         ...prev,
         stack: [...prev.stack, skill],
       }));
