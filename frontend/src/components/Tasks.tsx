@@ -1,8 +1,7 @@
 import Textarea from "../elements/Textarea";
 import useInput from "../hooks/use-input";
 
-const Tasks = () => {
-  const tasks = useInput("", { isEmpty: true });
+const Tasks = ({ tasks }) => {
   return (
     <Textarea
       label="Задачи на доработку"

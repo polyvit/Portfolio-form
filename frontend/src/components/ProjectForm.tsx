@@ -19,7 +19,7 @@ const stack = [
   "Prisma",
 ];
 
-const ProjectForm = () => {
+const ProjectForm = ({ formGeneralData, tasksToBeDone }) => {
   const {
     stepIndex,
     step,
@@ -29,10 +29,10 @@ const ProjectForm = () => {
     isFirstStep,
     isLastStep,
   } = useStepper([
-    <GeneralData />,
+    <GeneralData formData={formGeneralData} />,
     <ImageDropdown />,
     <Stack stack={stack} />,
-    <Tasks />,
+    <Tasks tasks={tasksToBeDone} />,
   ]);
 
   const handleMainBtnClick = () => {

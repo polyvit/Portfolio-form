@@ -3,6 +3,7 @@ import AuthService from "../api/auth/auth.service";
 import { useNavigate } from "react-router-dom";
 import ProjectForm from "../components/ProjectForm";
 import FormProvider from "../contextProvider";
+import FormWrapper from "../components/FormWrapper";
 
 const FormPage = () => {
   const navigate = useNavigate();
@@ -28,9 +29,10 @@ const FormPage = () => {
         >
           Logout
         </button>
-        <div className="text-center mt-[30px]">
+        {/* <div className="text-center mt-[30px]">
           <ProjectForm />
-        </div>
+        </div> */}
+        <FormWrapper />
       </div>
     </FormProvider>
   );

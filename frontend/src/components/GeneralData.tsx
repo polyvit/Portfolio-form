@@ -1,10 +1,25 @@
-import React from "react";
+import React, { useEffect } from "react";
 import Textarea from "../elements/Textarea";
 import Input from "../elements/Input";
 import useForm from "../hooks/use-form";
+import useFormContext from "../hooks/use-form-context";
 
-const GeneralData = () => {
-  const formData = useForm();
+const GeneralData = ({ formData }) => {
+  const context = useFormContext();
+
+  useEffect(() => {
+    return () => {
+      context.actions.setData((prev) => ({
+        ...prev,
+        title: formData.title.value,
+        description: formData.description.value,
+        short: formData.short.value,
+        demo: formData.demo.value,
+        repo: formData.repo.value,
+        year: formData.year.value,
+      }));
+    };
+  }, [...Object.values(formData).map((e) => e.value)]);
 
   return (
     <>

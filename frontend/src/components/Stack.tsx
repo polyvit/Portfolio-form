@@ -1,7 +1,24 @@
-import React, { useState } from "react";
+import useFormContext from "../hooks/use-form-context";
 
 const Stack = ({ stack }: { stack: string[] }) => {
-  const [skillArray, setSkillArray] = useState<string[]>([]);
+  const {
+    actions: { setData },
+    state: { data },
+  } = useFormContext();
+
+  const changeHandler = (skill) => {
+    if (data.stack.includes(skill)) {
+      setData((prev) => ({
+        ...prev,
+        stack: prev.stack.filter((s) => s !== skill),
+      }));
+    } else {
+      setData((prev) => ({
+        ...prev,
+        stack: [...prev.stack, skill],
+      }));
+    }
+  };
 
   return (
     <div>
@@ -16,10 +33,11 @@ const Stack = ({ stack }: { stack: string[] }) => {
           >
             <div className="flex items-center ps-3">
               <input
+                checked={data.stack.includes(skill)}
                 id="vue-checkbox-list"
                 type="checkbox"
                 className="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-700 dark:focus:ring-offset-gray-700 focus:ring-2 dark:bg-gray-600 dark:border-gray-500"
-                onClick={() => setSkillArray([...skillArray, skill])}
+                onChange={() => changeHandler(skill)}
               />
               <label
                 htmlFor="vue-checkbox-list"

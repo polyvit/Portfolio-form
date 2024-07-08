@@ -9,7 +9,7 @@ const FormProvider = ({ children }: { children: React.ReactNode }) => {
     demo: "",
     repo: "",
     year: 2024,
-    tasks: "",
+    tasks: "Провести тесты",
     images: [],
     stack: [],
   });
