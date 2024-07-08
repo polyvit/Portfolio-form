@@ -43,6 +43,8 @@ export interface IField {
 export type image = {
   name: string;
   url: string;
+  file: File;
+  dbUrl: string;
 };
 
 export interface IData {
