@@ -6,6 +6,7 @@ import Tasks from "./Tasks";
 import useStepper from "../hooks/use-stepper";
 import { IForm, IInput } from "../types";
 import useFormContext from "../hooks/use-form-context";
+import { extractUrl, stringToArray, validateData } from "../common";
 
 const steps = ["Основное", "Картинки", "Стек", "Дополнительно"];
 const stack = [
@@ -49,7 +50,21 @@ const ProjectForm = ({
 
   const handleMainBtnClick = () => {
     if (isLastStep) {
-      console.log("data", data);
+      const isValid = validateData(data);
+      if (isValid) {
+        const newData = {
+          demo: data.demo,
+          description: data.description,
+          images: extractUrl(data.images),
+          plans: stringToArray(tasks.value),
+          repo: data.repo,
+          short: data.short,
+          stack: data.stack,
+          title: data.title,
+          year: data.year,
+        };
+        console.log(newData);
+      }
     } else {
       next();
     }
