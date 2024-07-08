@@ -7,6 +7,7 @@ import useStepper from "../hooks/use-stepper";
 import { IForm, IInput } from "../types";
 import useFormContext from "../hooks/use-form-context";
 import { extractUrl, stringToArray, validateData } from "../common";
+import { firebaseConfig } from "../firebase/firebaseInit";
 
 const steps = ["Основное", "Картинки", "Стек", "Дополнительно"];
 const stack = [
@@ -48,7 +49,7 @@ const ProjectForm = ({
     state: { data },
   } = useFormContext();
 
-  const handleMainBtnClick = () => {
+  const handleMainBtnClick = async () => {
     if (isLastStep) {
       const isValid = validateData(data);
       if (isValid) {
@@ -63,7 +64,17 @@ const ProjectForm = ({
           title: data.title,
           year: data.year,
         };
-        console.log(newData);
+        try {
+          fetch(`${firebaseConfig.databaseURL}/test.json`, {
+            method: "POST",
+            body: JSON.stringify(newData),
+            headers: {
+              "Content-Type": "application/json",
+            },
+          }).then(() => console.log("Success"));
+        } catch (e) {
+          console.log(e);
+        }
       }
     } else {
       next();
