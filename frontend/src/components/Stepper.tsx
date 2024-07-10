@@ -16,6 +16,7 @@ const Stepper: React.FC<IStepperProps> = ({
     <ol className="flex items-center w-full p-3 space-x-2 text-sm font-medium text-center text-gray-500 bg-white border border-gray-200 rounded-lg shadow-sm dark:text-gray-400 sm:text-base dark:bg-gray-800 dark:border-gray-700 sm:p-4 sm:space-x-4 rtl:space-x-reverse">
       {steps.map((step, i) => (
         <li
+          key={step}
           onClick={() => setStepNumber(i)}
           className={cn("flex items-center cursor-pointer", {
             ["text-blue-600 dark:text-blue-500"]: i === stepNumber,
@@ -43,9 +44,9 @@ const Stepper: React.FC<IStepperProps> = ({
             >
               <path
                 stroke="currentColor"
-                stroke-linecap="round"
-                stroke-linejoin="round"
-                stroke-width="2"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                strokeWidth="2"
                 d="m7 9 4-4-4-4M1 9l4-4-4-4"
               />
             </svg>
