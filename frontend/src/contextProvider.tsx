@@ -1,9 +1,22 @@
 import React, { createContext, useState } from "react";
 import { IData } from "./types";
+
 export const FormContext = createContext<IFormContext>({
   state: {},
   actions: {},
 });
+
+export const INITIAL_DATA = {
+  title: "",
+  short: "",
+  description: "",
+  demo: "",
+  repo: "",
+  year: 2024,
+  tasks: "Провести тесты",
+  images: [],
+  stack: [],
+};
 
 interface IFormContext {
   state: IData | {};
@@ -11,17 +24,7 @@ interface IFormContext {
 }
 
 const FormProvider = ({ children }: { children: React.ReactNode }) => {
-  const [data, setData] = useState({
-    title: "",
-    short: "",
-    description: "",
-    demo: "",
-    repo: "",
-    year: 2024,
-    tasks: "Провести тесты",
-    images: [],
-    stack: [],
-  });
+  const [data, setData] = useState(INITIAL_DATA);
   const value = {
     state: { data },
     actions: { setData },

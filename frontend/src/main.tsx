@@ -12,13 +12,13 @@ const queryClient = new QueryClient();
 initializeApp(firebaseConfig);
 
 ReactDOM.createRoot(document.getElementById("root")!).render(
-  <React.StrictMode>
-    <BrowserRouter>
-      <SnackbarProvider>
-        <QueryClientProvider client={queryClient}>
-          <App />
-        </QueryClientProvider>
-      </SnackbarProvider>
-    </BrowserRouter>
-  </React.StrictMode>
+  // <React.StrictMode>
+  <BrowserRouter>
+    <SnackbarProvider>
+      <QueryClientProvider client={queryClient}>
+        <App />
+      </QueryClientProvider>
+    </SnackbarProvider>
+  </BrowserRouter>
+  // </React.StrictMode>
 );

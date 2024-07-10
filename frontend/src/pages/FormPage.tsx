@@ -1,7 +1,6 @@
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import AuthService from "../api/auth/auth.service";
 import { useNavigate } from "react-router-dom";
-import ProjectForm from "../components/ProjectForm";
 import FormProvider from "../contextProvider";
 import FormWrapper from "../components/FormWrapper";
 
@@ -21,7 +20,7 @@ const FormPage = () => {
 
   return (
     <FormProvider>
-      <div className="relative w-screen h-screen flex justify-center">
+      <div className="relative w-screen h-screen flex justify-center items-center">
         <button
           onClick={() => mutateLogout()}
           disabled={isPendingLogout}
@@ -29,9 +28,6 @@ const FormPage = () => {
         >
           Logout
         </button>
-        {/* <div className="text-center mt-[30px]">
-          <ProjectForm />
-        </div> */}
         <FormWrapper />
       </div>
     </FormProvider>

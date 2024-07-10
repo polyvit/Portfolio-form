@@ -8,6 +8,7 @@ import { IForm, IInput } from "../types";
 import useFormContext from "../hooks/use-form-context";
 import { extractUrl, stringToArray, validateData } from "../common";
 import { firebaseConfig } from "../firebase/firebaseInit";
+import { INITIAL_DATA } from "../contextProvider";
 
 const steps = ["Основное", "Картинки", "Стек", "Дополнительно"];
 const stack = [
@@ -26,9 +27,11 @@ const stack = [
 const ProjectForm = ({
   formGeneralData,
   tasks,
+  setIsSuccess,
 }: {
   formGeneralData: IForm;
   tasks: IInput;
+  setIsSuccess(a: boolean): void;
 }) => {
   const {
     stepIndex,
@@ -47,7 +50,14 @@ const ProjectForm = ({
 
   const {
     state: { data },
+    actions: { setData },
   } = useFormContext();
+
+  const showSuccess = () => {
+    setIsSuccess(true);
+    setData(INITIAL_DATA);
+    setTimeout(() => setIsSuccess(false), 5000);
+  };
 
   const handleMainBtnClick = async () => {
     if (isLastStep) {
@@ -71,7 +81,7 @@ const ProjectForm = ({
             headers: {
               "Content-Type": "application/json",
             },
-          }).then(() => console.log("Success"));
+          }).then(() => showSuccess());
         } catch (e) {
           console.log(e);
         }
