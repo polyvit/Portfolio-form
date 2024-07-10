@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react"
 
 const useValidate = (inputValue: string, validators: Record<string, any>) => {
-    const [isEmpty, setIsEmpty] = useState<boolean>(true)
+    const [isEmpty, setIsEmpty] = useState<boolean>(false)
     const [minLengthError, setMinLengthError] = useState<boolean>(false)
     const [isEmail, setIsEmail] = useState<boolean>(true)
     const [isYear, setIsYear] = useState<boolean>(true)

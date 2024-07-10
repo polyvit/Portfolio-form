@@ -17,7 +17,7 @@ const GeneralData = ({ formData }: { formData: IForm }) => {
         short: formData.short.value,
         demo: formData.demo.value,
         repo: formData.repo.value,
-        year: formData.year.value,
+        year: formData.year.value || `${new Date().getFullYear()}`,
       }));
     };
   }, [...Object.values(formData).map((e) => e.value)]);

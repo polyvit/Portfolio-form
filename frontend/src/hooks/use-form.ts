@@ -6,8 +6,7 @@ const useForm = () => {
     const description = useInput("", { isEmpty: true })
     const demo = useInput("", { isEmpty: true })
     const repo = useInput("", { isEmpty: true })
-    const year = useInput("", { isEmpty: true, isYear: false })
-    
+    const year = useInput(`${new Date().getFullYear()}`)
 
     return {
         title: {...title, label: 'Название', placeholder: "Укажите название проекта", type: "text"}, 

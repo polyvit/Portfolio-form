@@ -53,7 +53,7 @@ export interface IData {
   description: string;
   demo: string;
   repo: string;
-  year: number;
+  year: number | string;
   tasks: string;
   images: image[];
   stack: string[];

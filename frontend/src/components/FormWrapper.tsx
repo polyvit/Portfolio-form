@@ -7,7 +7,7 @@ import { useState } from "react";
 
 const FormWrapper = () => {
   const formGeneralData: IForm = useForm();
-  const tasks = useInput("", { isEmpty: true });
+  const tasks = useInput("");
   const [isSuccess, setIsSuccess] = useState<boolean | null>(null);
   return (
     <div className="text-center mt-[30px]">
