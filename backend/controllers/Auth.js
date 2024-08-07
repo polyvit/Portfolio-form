@@ -41,6 +41,13 @@ class AuthController {
       return ErrorUtils.catchError(res, err);
     }
   }
+  static async test(req, res) {
+    try {
+      return res.status(200).json({ message: "Server is working" });
+    } catch (err) {
+      return res.status(400).json({ message: "Server error" });
+    }
+  }
 }
 
 export default AuthController;
