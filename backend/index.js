@@ -12,7 +12,7 @@ dotenv.config();
 const app = express();
 app.use(express.json());
 app.use(cookieParser());
-app.use(cors({ credentials: true, origin: process.env.CLIENT_URL }));
+app.use(cors({ credentials: true, origin: ["http://localhost:5173"] }));
 
 app.use(
   Fingerprint({
@@ -25,3 +25,5 @@ app.use("/auth", AuthRouter);
 app.listen(PORT, () => {
   console.log("Сервер успешно запущен");
 });
+
+//process.env.CLIENT_URL

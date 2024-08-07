@@ -11,7 +11,6 @@ class AuthService {
     if (!userData) throw new NotFound("Такого пользователя не существует");
     const isPasswordValid = bcrypt.compareSync(password, userData.password);
     if (!isPasswordValid) {
-      console.log("signInService", "password not valid");
       throw new Unauthorized("Неверный логин или пароль");
     }
     const payload = { id: userData.id, email: userData.email };
