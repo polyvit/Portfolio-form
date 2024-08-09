@@ -4,6 +4,10 @@ const endpoints = {
         "register": "/sign-up",
         "refresh": "/refresh",
         "logout": "/logout"
+    },
+    PROJECTS: {
+        PROD: "data/projects.json",
+        TEST: "test.json"
     }
 }
 

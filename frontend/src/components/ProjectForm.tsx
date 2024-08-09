@@ -6,23 +6,10 @@ import Tasks from "./Tasks";
 import useStepper from "../hooks/use-stepper";
 import { IForm, IInput } from "../types";
 import useFormContext from "../hooks/use-form-context";
-import { extractUrl, stringToArray, validateData } from "../common";
-import { firebaseConfig } from "../firebase/firebaseInit";
+import { extractUrl, stringToArray, validateData } from "../utils/common";
 import { INITIAL_DATA } from "../contextProvider";
-
-const steps = ["Основное", "Картинки", "Стек", "Дополнительно"];
-const stack = [
-  "JavaScript",
-  "TypeScript",
-  "React",
-  "Redux",
-  "Vue",
-  "Vuex",
-  "Next",
-  "Jest",
-  "Pinia",
-  "Prisma",
-];
+import ProjectService from "../api/main.service";
+import { stack, steps } from "../utils/fields";
 
 const ProjectForm = ({
   formGeneralData,
@@ -49,7 +36,9 @@ const ProjectForm = ({
   ]);
 
   const {
+    //@ts-ignore
     state: { data },
+    //@ts-ignore
     actions: { setData },
   } = useFormContext();
 
@@ -57,6 +46,7 @@ const ProjectForm = ({
     setIsSuccess(true);
     setData(INITIAL_DATA);
     setTimeout(() => setIsSuccess(false), 5000);
+    location.reload();
   };
 
   const handleMainBtnClick = async () => {
@@ -75,13 +65,8 @@ const ProjectForm = ({
           year: data.year,
         };
         try {
-          fetch(`${firebaseConfig.databaseURL}/test.json`, {
-            method: "POST",
-            body: JSON.stringify(newData),
-            headers: {
-              "Content-Type": "application/json",
-            },
-          }).then(() => showSuccess());
+          const result = await ProjectService.addProject(newData);
+          if (result == true) showSuccess();
         } catch (e) {
           console.log(e);
         }

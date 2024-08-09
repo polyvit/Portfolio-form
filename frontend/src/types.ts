@@ -55,8 +55,8 @@ export interface IData {
   repo: string;
   year: number | string;
   tasks: string;
-  images: image[];
-  stack: string[];
+  images: image[] | string[];
+  stack: string[]
 }
 
 export interface IInput {

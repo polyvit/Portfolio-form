@@ -18,7 +18,7 @@ export const INITIAL_DATA = {
   stack: [],
 };
 
-interface IFormContext {
+export interface IFormContext {
   state: IData | {};
   actions: Record<string, React.Dispatch<React.SetStateAction<IData>>> | {};
 }
