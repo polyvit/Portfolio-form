@@ -1,9 +1,10 @@
 import { useEffect, useState } from "react"
 
 const useValidate = (inputValue: string, validators: Record<string, any>) => {
-    const [isEmpty, setIsEmpty] = useState<boolean>(true)
+    const [isEmpty, setIsEmpty] = useState<boolean>(false)
     const [minLengthError, setMinLengthError] = useState<boolean>(false)
     const [isEmail, setIsEmail] = useState<boolean>(true)
+    const [isYear, setIsYear] = useState<boolean>(true)
     const [errorText, setErrorText] = useState("")
     const [inputValid, setInputValid] = useState(false)
 
@@ -12,6 +13,9 @@ const useValidate = (inputValue: string, validators: Record<string, any>) => {
             switch (validator) {
                 case "isEmpty": 
                     inputValue ? setIsEmpty(false) : setIsEmpty(true)
+                    break;
+                case "isYear": 
+                    (+inputValue >= 1000 && +inputValue <= 2100) ? setIsYear(true) : setIsYear(false)
                     break;
                 case "minLength": 
                     inputValue.length < validators[validator] ? setMinLengthError(true) : setMinLengthError(false)
@@ -37,26 +41,33 @@ const useValidate = (inputValue: string, validators: Record<string, any>) => {
         } else {
             setErrorText("")
         }
+        if (!isYear) {
+            setErrorText("Введенное значение не является годом")
+            return
+        } else {
+            setErrorText("")
+        }
         if (minLengthError) {
             setErrorText("Длина пароля должна быть от 6 символов")
             return
         } else {
             setErrorText("")
         }
-    }, [isEmail, isEmpty, minLengthError])
+    }, [isEmail, isEmpty, minLengthError, isYear])
 
     useEffect(() => {
-        if (!isEmail || isEmpty || minLengthError) {
+        if (!isEmail || isEmpty || minLengthError || !isYear) {
             setInputValid(false)
         } else {
             setInputValid(true)
         }
-    }, [isEmail, isEmpty, minLengthError])
+    }, [isEmail, isEmpty, minLengthError, isYear])
 
     return {
         isEmpty,
         minLengthError,
         isEmail,
+        isYear,
         errorText,
         inputValid
     }
