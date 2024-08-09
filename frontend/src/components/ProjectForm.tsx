@@ -15,10 +15,12 @@ const ProjectForm = ({
   formGeneralData,
   tasks,
   setIsSuccess,
+  setIsError,
 }: {
   formGeneralData: IForm;
   tasks: IInput;
   setIsSuccess(a: boolean): void;
+  setIsError(a: boolean): void;
 }) => {
   const {
     stepIndex,
@@ -69,6 +71,8 @@ const ProjectForm = ({
           if (result == true) showSuccess();
         } catch (e) {
           console.log(e);
+          setIsError(true);
+          setTimeout(() => setIsError(false), 5000);
         }
       }
     } else {

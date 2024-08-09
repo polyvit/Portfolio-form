@@ -9,16 +9,20 @@ const FormWrapper = () => {
   const formGeneralData: IForm = useForm();
   const tasks = useInput("");
   const [isSuccess, setIsSuccess] = useState<boolean | null>(null);
+  const [isError, setIsError] = useState<boolean | null>(null);
+
   return (
     <div className="text-center mt-[30px]">
-      {!isSuccess && (
+      {!isSuccess && !isError && (
         <ProjectForm
           formGeneralData={formGeneralData}
           tasks={tasks}
           setIsSuccess={setIsSuccess}
+          setIsError={setIsError}
         />
       )}
       {isSuccess && <Done />}
+      {isError && <h1>Что-то пошло не так</h1>}
     </div>
   );
 };

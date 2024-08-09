@@ -3,7 +3,7 @@ import endpoints from "./endpoints";
 
 class ProjectService {
   static async addProject(newData: any) {
-    return await fetch(`${firebaseConfig.databaseURL}/${endpoints.PROJECTS.TEST}`, {
+    return await fetch(`${firebaseConfig.databaseURL}/${endpoints.PROJECTS.PROD}`, {
       method: "POST",
       body: JSON.stringify(newData),
       headers: {
