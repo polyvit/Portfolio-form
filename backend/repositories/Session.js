@@ -1,22 +1,18 @@
-import prisma from "../prisma/lib.js";
+import Session from "../models/Session.js";
 
 class SessionRepository {
   static async createRefreshSession({ id, refreshToken, fingerprint }) {
-    const session = {
-      userId: id,
+    const newSession = new Session({
+      userId: String(id),
       refresh_token: refreshToken,
       fingerprint: fingerprint.hash,
-    };
-    return prisma.session.create({
-      data: session,
     });
+    await newSession.save();
+    return newSession;
   }
   static async deleteRefreshSession(refreshToken) {
-    return prisma.session.delete({
-      where: {
-        refresh_token: refreshToken,
-      },
-    });
+    const result = await Session.findOneAndDelete({ refreshToken });
+    return result;
   }
 }
 

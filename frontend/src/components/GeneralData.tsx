@@ -1,7 +1,6 @@
-import React, { useEffect } from "react";
+import { useEffect } from "react";
 import Textarea from "../elements/Textarea";
 import Input from "../elements/Input";
-import useForm from "../hooks/use-form";
 import useFormContext from "../hooks/use-form-context";
 import { IForm } from "../types";
 
@@ -10,15 +9,17 @@ const GeneralData = ({ formData }: { formData: IForm }) => {
 
   useEffect(() => {
     return () => {
-      context.actions.setData((prev) => ({
-        ...prev,
-        title: formData.title.value,
-        description: formData.description.value,
-        short: formData.short.value,
-        demo: formData.demo.value,
-        repo: formData.repo.value,
-        year: formData.year.value || `${new Date().getFullYear()}`,
-      }));
+      if ("setData" in context.actions) {
+        context.actions.setData((prev) => ({
+          ...prev,
+          title: formData.title.value,
+          description: formData.description.value,
+          short: formData.short.value,
+          demo: formData.demo.value,
+          repo: formData.repo.value,
+          year: formData.year.value || `${new Date().getFullYear()}`,
+        }));
+      }
     };
   }, [...Object.values(formData).map((e) => e.value)]);
 

@@ -1,5 +1,4 @@
 import Textarea from "../elements/Textarea";
-import useInput from "../hooks/use-input";
 import { IInput } from "../types";
 
 const Tasks = ({ tasks }: { tasks: IInput }) => {

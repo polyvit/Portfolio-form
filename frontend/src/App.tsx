@@ -9,10 +9,10 @@ function App() {
   const navigate = useNavigate();
 
   useEffect(() => {
-    // const token = AuthHelper.getAccessToken();
-    // if (!token) {
-    //   navigate("/sign-up");
-    // }
+    const token = AuthHelper.getAccessToken();
+    if (!token) {
+      navigate("/sign-up");
+    }
   }, []);
 
   return (

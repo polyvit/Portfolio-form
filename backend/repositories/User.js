@@ -1,18 +1,14 @@
-import prisma from "../prisma/lib.js";
+import User from "../models/User.js";
 
 class UserRepository {
   static async createUser({ email, hashedPassword }) {
-    const user = { email, password: hashedPassword };
-    return prisma.user.create({
-      data: user,
-    });
+    const user = new User({ email, password: hashedPassword });
+    const result = await user.save();
+    return result;
   }
   static async getUserData(email) {
-    return prisma.user.findUnique({
-      where: {
-        email,
-      },
-    });
+    const user = await User.findOne({ email });
+    return user;
   }
 }
 

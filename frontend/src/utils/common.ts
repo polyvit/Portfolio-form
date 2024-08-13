@@ -1,7 +1,7 @@
-import { IForm, image } from "./types";
+import { image } from "../types";
 
-export const validateData = (data: IForm) => {
-  return Object.values(data).every((val) => val.length);
+export const validateData = (data: any) => {
+  return Object.values(data).every((val: string) => val.length);
 };
 export const stringToArray = (string: string) => {
   return string.split(",").map(str => str.trim());

@@ -17,7 +17,9 @@ const ImageDropdown = () => {
   const storage = getStorage();
 
   const {
+    //@ts-ignore
     actions: { setData },
+    //@ts-ignore
     state: { data },
   } = useFormContext();
 

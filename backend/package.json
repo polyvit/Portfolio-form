@@ -5,8 +5,7 @@
   "main": "index.js",
   "type": "module",
   "scripts": {
-    "start": "nodemon index.js",
-    "postinstall": "prisma generate"
+    "start": "nodemon index.js"
   },
   "keywords": [],
   "author": "",
@@ -21,6 +20,7 @@
     "express-fingerprint": "^1.2.2",
     "geoip-lite": "^1.4.2",
     "jsonwebtoken": "^9.0.2",
+    "mongoose": "^8.5.2",
     "nodemon": "^3.1.0"
   },
   "devDependencies": {

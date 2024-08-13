@@ -3,7 +3,9 @@ import { IData } from "../types";
 
 const Stack = ({ stack }: { stack: string[] }) => {
   const {
+    //@ts-ignore
     actions: { setData },
+    //@ts-ignore
     state: { data },
   } = useFormContext();
 

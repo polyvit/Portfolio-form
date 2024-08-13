@@ -1,4 +1,4 @@
-import { useMutation, useQueryClient } from "@tanstack/react-query";
+import { useMutation } from "@tanstack/react-query";
 import AuthService from "../api/auth/auth.service";
 import { useNavigate } from "react-router-dom";
 import FormProvider from "../contextProvider";
@@ -6,7 +6,6 @@ import FormWrapper from "../components/FormWrapper";
 
 const FormPage = () => {
   const navigate = useNavigate();
-  const queryClient = useQueryClient();
 
   const { mutate: mutateLogout, isPending: isPendingLogout } = useMutation({
     mutationKey: ["logout"],
@@ -15,8 +14,6 @@ const FormPage = () => {
       navigate("/sign-in");
     },
   });
-
-  const data = queryClient.getQueryData(["userEmail"]);
 
   return (
     <FormProvider>
